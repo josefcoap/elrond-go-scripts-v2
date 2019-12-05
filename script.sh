@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+#Script version
+VERSION="1.0.0"
+
 #Color to the people
 RED='\x1B[0;31m'
 CYAN='\x1B[0;36m'
@@ -341,8 +344,39 @@ if [ "$DBQUERY" -eq "1" ]; then
     done 
   ;;
 
+'github_pull')
+  #First backup identity, target_ips & variables.cfg
+  if ! [ -d "$CUSTOM_HOME/script-configs-backup" ]; then mkdir -p $CUSTOM_HOME/script-configs-backup; fi
+  
+  echo -e
+  echo -e "${GREEN}---> Backing up your existing configs (variables.cfg, identity & target_ips)${NC}"
+  echo -e
+  cp -f config/identity $CUSTOM_HOME/script-configs-backup
+  cp -f config/target_ips $CUSTOM_HOME/script-configs-backup
+  cp -f config/variables.cfg $CUSTOM_HOME/script-configs-backup
+  
+  echo -e "${GREEN}---> Fetching the latest version of the sripts...${NC}"
+  echo -e
+  #Now let's fetch the latest version of the scripts
+  git reset --hard HEAD
+  git pull
+  
+  #Restore configs after repo pull
+  echo -e "${GREEN}---> Restoring your config files${NC}"
+  echo -e
+  cp -f $CUSTOM_HOME/script-configs-backup/* config/
+  
+  echo -e
+  echo -e "${GREEN}---> Finished fetching scripts. You are on version: ${CYAN}$VERSION${GREEN}...${NC}"
+  echo -e
+  
+  ;;
 
-
+'version')
+  echo -e
+  echo -e "${GREEN}---> You are on version: ${CYAN}$VERSION${GREEN} of the scripts...${NC}"
+  echo -e
+  ;;
 
 'deploy')
   deploy_to_host
