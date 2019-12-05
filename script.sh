@@ -2,7 +2,7 @@
 set -e
 
 #Script version
-VERSION="1.1.1"
+VERSION="1.2.0"
 
 #Color to the people
 RED='\x1B[0;31m'
@@ -10,9 +10,12 @@ CYAN='\x1B[0;36m'
 GREEN='\x1B[0;32m'
 NC='\x1B[0m'
 
-source config/identity
-source config/variables.cfg
-source config/functions.cfg
+#Make script aware of its location
+SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+
+source $SCRIPTPATH/config/identity
+source $SCRIPTPATH/config/variables.cfg
+source $SCRIPTPATH/config/functions.cfg
 
 case "$1" in
 
@@ -279,6 +282,7 @@ if [ "$DBQUERY" -eq "1" ]; then
             echo -e "${GREEN}Removing auto-updater crontab from host ${CYAN}$HOST${GREEN}...${NC}"
             echo -e      
             crontab -l | grep -v '/auto-updater.sh'  | crontab -
+            crontab -l | grep -v '/script.sh github_pull'  | crontab -
             
             echo -e "${GREEN}Removing paths from .profile on host ${CYAN}$HOST${GREEN}...${NC}"
             echo -e
@@ -351,23 +355,22 @@ if [ "$DBQUERY" -eq "1" ]; then
   echo -e
   echo -e "${GREEN}---> Backing up your existing configs (variables.cfg, identity & target_ips)${NC}"
   echo -e
-  cp -f config/identity $CUSTOM_HOME/script-configs-backup
+  cp -f $SCRIPTPATH/config/identity $CUSTOM_HOME/script-configs-backup
   if [[ -f config/target_ips ]]; then cp -f config/target_ips $CUSTOM_HOME/script-configs-backup; fi
-  cp -f config/variables.cfg $CUSTOM_HOME/script-configs-backup
+  cp -f $SCRIPTPATH/config/variables.cfg $CUSTOM_HOME/script-configs-backup
   
   echo -e "${GREEN}---> Fetching the latest version of the sripts...${NC}"
   echo -e
   #Now let's fetch the latest version of the scripts
+  cd $SCRIPTPATH
   git reset --hard HEAD
   git pull
   
   #Restore configs after repo pull
   echo -e "${GREEN}---> Restoring your config files${NC}"
   echo -e
-  cp -f $CUSTOM_HOME/script-configs-backup/* config/
+  cp -f $CUSTOM_HOME/script-configs-backup/* $SCRIPTPATH/config/
   replicant
-  
-  echo -e
   echo -e "${GREEN}---> Finished fetching scripts. You are on version: ${CYAN}$VERSION${GREEN}...${NC}"
   echo -e
   
