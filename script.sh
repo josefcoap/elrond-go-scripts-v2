@@ -2,7 +2,7 @@
 set -e
 
 #Script version
-VERSION="1.0.0"
+VERSION="1.0.1"
 
 #Color to the people
 RED='\x1B[0;31m'
@@ -365,6 +365,7 @@ if [ "$DBQUERY" -eq "1" ]; then
   echo -e "${GREEN}---> Restoring your config files${NC}"
   echo -e
   cp -f $CUSTOM_HOME/script-configs-backup/* config/
+  replicant
   
   echo -e
   echo -e "${GREEN}---> Finished fetching scripts. You are on version: ${CYAN}$VERSION${GREEN}...${NC}"
