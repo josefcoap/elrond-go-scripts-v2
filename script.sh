@@ -2,7 +2,7 @@
 set -e
 
 #Script version
-VERSION="1.1.0"
+VERSION="1.1.1"
 
 #Color to the people
 RED='\x1B[0;31m'
@@ -384,6 +384,6 @@ if [ "$DBQUERY" -eq "1" ]; then
   ;;
 
 *)
-  echo "Usage: Missing parameter ! [install|install-remote|upgrade|upgrade-remote|start|start-remote|stop|stop-remote|cleanup|cleanup-remote]"
+  echo "Usage: Missing parameter ! [install|install-remote|upgrade|upgrade-remote|start|start-remote|stop|stop-remote|cleanup|cleanup-remote|github_pull|version]"
   ;;
 esac
