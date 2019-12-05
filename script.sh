@@ -2,7 +2,7 @@
 set -e
 
 #Script version
-VERSION="1.0.1"
+VERSION="1.0.2"
 
 #Color to the people
 RED='\x1B[0;31m'
@@ -352,7 +352,7 @@ if [ "$DBQUERY" -eq "1" ]; then
   echo -e "${GREEN}---> Backing up your existing configs (variables.cfg, identity & target_ips)${NC}"
   echo -e
   cp -f config/identity $CUSTOM_HOME/script-configs-backup
-  cp -f config/target_ips $CUSTOM_HOME/script-configs-backup
+  if [[ -f config/target_ips ]]; then cp -f config/target_ips $CUSTOM_HOME/script-configs-backup; fi
   cp -f config/variables.cfg $CUSTOM_HOME/script-configs-backup
   
   echo -e "${GREEN}---> Fetching the latest version of the sripts...${NC}"
