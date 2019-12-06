@@ -15,7 +15,7 @@ Each node will run in background as a separate systemd unit.
 
 ## SCRIPT SETTINGS - MUST BE MODIFIED BEFORE FIRST RUN
 
-- config/variables.cfg - used to define username, home path, keys location and SSH port.
+- config/variables.cfg - used to define username, home path, validator keys location, Github OAUTH Token and SSH port.
 - config/identity 	   - used to define the path to the SSH key - <MAKE SURE YOU EDIT THIS FILE TO MATCH YOUR SETUP!>
 - config/target_ips    - used to define the list of remote machines (IPs or hostnames), each machine in a new line
 
@@ -54,7 +54,7 @@ Example of adding your validator keys to a zip file (node-0.zip):
 		Running the script with the 'install' or 'install-remote' parameter will prompt for each machine the following:
 			- number of nodes to be ran on the machine
 			- validator display name for each node (this will only be asked one time)
-			- optionally enable the auto-update feature (default 'No') - see [AUTO UPDATE] section for more details	
+			- optionally enable the auto-update feature and scripts update feature (default 'No') - see [AUTO UPDATE] section for more details	
 			
 	[UPGRADE]
 		#upgrades the node(s) on the local machine
@@ -82,19 +82,24 @@ Example of adding your validator keys to a zip file (node-0.zip):
 		./script.sh cleanup
 		
 		#Removes all the node(s) files on all the machines specified in 'target_ips' file
-		./script.sh cleanup-remote 
+		./script.sh cleanup-remote
+    
+	[SCRIPTS UPDATE]
+		#fetches the latest version of the scripts from github while backing up your configs
+		./script.sh github_pull   
+    
 
 ## AUTO UPDATE
 
-If you choose to enable this function, a cron job will be created. The job searches every 10 minutes for new releases.
+If you choose to enable this function, two cron jobs will be created. One cronjob will search at an interval between 8 and 12 minutes for new elrong-go releases and the other one will run hourly scripts update checks.
 You can check the status of the auto-update job in the file $HOME/autoupdate.status
 If you haven't installed the updater function but you wish to do it afterwards you can do it bu running:
 
 	[AUTO-UPDATER CRON]	
-		#installs the auto-update cronjob on the local machine
+		#installs the auto-update and the scripts update cronjobs on the local machine
 		./script.sh crontab
 		
-		#installs the auto-update cronjob on all the machines specified in 'target_ips' file
+		#installs the auto-update and the scripts update cronjobs on all the machines specified in 'target_ips' file
 		./script.sh crontab-remote 
 		
 
