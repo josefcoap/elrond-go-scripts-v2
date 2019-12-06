@@ -350,7 +350,7 @@ if [ "$DBQUERY" -eq "1" ]; then
 
 'github_pull')
   #First backup identity, target_ips & variables.cfg
-  if ! [ -d "$CUSTOM_HOME/script-configs-backup" ]; then mkdir -p $CUSTOM_HOME/script-configs-backup; fi
+  if ! [ -d "../script-configs-backup" ]; then mkdir -p ../script-configs-backup; fi
   
   echo -e
   echo -e "${GREEN}---> Backing up your existing configs (variables.cfg, identity & target_ips)${NC}"
