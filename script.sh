@@ -2,7 +2,7 @@
 set -e
 
 #Script version
-VERSION="1.2.1"
+VERSION="1.2.2"
 
 #Color to the people
 RED='\x1B[0;31m'
@@ -139,9 +139,9 @@ case "$1" in
   install_utils
   
   INSTALLEDNODES=$(cat $CUSTOM_HOME/.numberofnodes)  
-  curl --silent "https://api.github.com/repos/ElrondNetwork/elrond-go/releases/latest" | grep "body" > $HOME/tmp
+  curl --silent "https://api.github.com/repos/ElrondNetwork/elrond-go/releases/latest" | grep "body" > $HOME/body_tmp
   
-  if grep -q "*This release should start with a new DB*" "$HOME/tmp" 
+  if grep -q "*This release should start with a new DB*" "$HOME/body_tmp" 
                                         then DBQUERY=1
                             else DBQUERY=0 
                   fi
@@ -175,7 +175,7 @@ if [ "$DBQUERY" -eq "1" ]; then
           done
     fi
 
-    rm $HOME/tmp    
+    rm $HOME/body_tmp    
   ;;
 
 'upgrade-remote')
