@@ -356,7 +356,7 @@ if [ "$DBQUERY" -eq "1" ]; then
   echo -e "${GREEN}---> Backing up your existing configs (variables.cfg, identity & target_ips)${NC}"
   echo -e
   cp -f $SCRIPTPATH/config/identity $CUSTOM_HOME/script-configs-backup
-  if [[ -f config/target_ips ]]; then cp -f config/target_ips $CUSTOM_HOME/script-configs-backup; fi
+  if [[ -f $SCRIPTPATH/config/target_ips ]]; then cp -f $SCRIPTPATH/config/target_ips $CUSTOM_HOME/script-configs-backup; fi
   cp -f $SCRIPTPATH/config/variables.cfg $CUSTOM_HOME/script-configs-backup
   
   echo -e "${GREEN}---> Fetching the latest version of the sripts...${NC}"
