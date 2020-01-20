@@ -96,6 +96,7 @@ case "$1" in
 
 'upgrade')
   paths
+  go_lang
   #Remove previously cloned repos  
   if [ -d "$GOPATH/src/github.com/ElrondNetwork/elrond-go" ]; then sudo rm -rf $GOPATH/src/github.com/ElrondNetwork/elrond-*; echo -e; echo -e "${RED}--> Repos present. Removing and fetching again...${NC}"; echo -e; fi
   git_clone
@@ -132,6 +133,7 @@ case "$1" in
 
 'auto_upgrade')
   paths
+  go_lang
   #Remove previously cloned repos
   if [ -d "$GOPATH/src/github.com/ElrondNetwork/elrond-go" ]; then sudo rm -rf $GOPATH/src/github.com/ElrondNetwork/elrond-*; fi
   git_clone
