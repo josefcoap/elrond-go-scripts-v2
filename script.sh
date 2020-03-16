@@ -136,6 +136,7 @@ case "$1" in
   if [ -d "$GOPATH/src/github.com/ElrondNetwork/elrond-go" ]; then sudo rm -rf $GOPATH/src/github.com/ElrondNetwork/elrond-*; fi
   git_clone
   build_node
+  build_keygen
   install_utils
   
   INSTALLEDNODES=$(cat $CUSTOM_HOME/.numberofnodes)  
