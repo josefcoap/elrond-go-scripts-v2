@@ -2,7 +2,7 @@
 set -e
 
 #Script version
-VERSION="1.2.4"
+VERSION="1.2.5"
 
 #Color to the people
 RED='\x1B[0;31m'
