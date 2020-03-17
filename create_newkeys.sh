@@ -14,12 +14,12 @@ if [ "$FOLDERNAME" = "" ]
 
 echo 'you have choose '$FOLDERNAME
 
-if [ -d "$FOLDERNAME" ]; then
+if [ -d "$HOME/$FOLDERNAME" ]; then
   echo "Folder ${FOLDERNAME} found ..."
 	OLD_COPY=$FOLDERNAME"_old"
 	echo -e
 	echo "A backup of your old keys will be moved to $OLD_COPY"
-	if [ -d "$OLD_COPY" ]; then
+	if [ -d "$HOME/$OLD_COPY" ]; then
 		echo "Error: $OLD_COPY found. You had executed this two times. Can not continue."
 	else
 		echo "Proceding with the key generation..."
