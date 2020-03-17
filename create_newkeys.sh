@@ -22,20 +22,21 @@ if [ "$FOLDERNAME" = "" ]
 echo -e "${GREEN}You have selected the ${CYAN}$FOLDERNAME${GREEN} folder.${NC}"
 
 if [ -d "$HOME/$FOLDERNAME" ]; then
-  echo -e "${GREEN}Folder ${CYAN}${FOLDERNAME}${GREEN} found ...${NC}"
-	OLD_COPY=$FOLDERNAME"_old"
-	echo -e
-	echo -e "${GREEN}A backup of your old keys will be moved to ${CYAN}$OLD_COPY${NC}"
-	if [ -d "$HOME/$OLD_COPY" ]; then
-		echo -e "${RED}Error: $OLD_COPY${RED} found. You had executed this two times. Can't continue !${NC}"
-	else
-		echo -e "${GREEN}Proceding with the key generation...${NC}"
-		echo -e
-		read -p "How many keys do you want to generate ? : " NUMBEROFNODES
-		  re='^[0-9]+$'
-		  if ! [[ $NUMBEROFNODES =~ $re ]] && [ "$NUMBEROFNODES" -gt 0 ]
-		  then
-		      NUMBEROFNODES = 1
+          echo -e "${GREEN}Folder ${CYAN}${FOLDERNAME}${GREEN} found ...${NC}"
+	        OLD_COPY=$FOLDERNAME"_old"
+	        echo -e
+	        echo -e "${GREEN}A backup of your old keys will be moved to ${CYAN}$OLD_COPY${NC}"
+	
+  if [ -d "$HOME/$OLD_COPY" ]; then
+		      echo -e "${RED}Error: $OLD_COPY${RED} found. You had executed this two times. Can't continue !${NC}"
+	       else
+		       echo -e "${GREEN}Proceding with the key generation...${NC}"
+		       echo -e
+		       read -p "How many keys do you want to generate ? : " NUMBEROFNODES
+		       re='^[0-9]+$'
+		       if ! [[ $NUMBEROFNODES =~ $re ]] && [ "$NUMBEROFNODES" -gt 0 ]
+		             then
+		               NUMBEROFNODES = 1
 		  fi
 
 	cd $HOME
