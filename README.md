@@ -10,7 +10,7 @@ Each node will run in background as a separate systemd unit.
 ## REQUIREMENTS
 
 - Running Ubuntu 18.04 & up
-- Running the script requires sudo priviledges (without password).
+- Running the script requires a user (not root) with sudo priviledges (without password).
 - Remote machines should be accesible via SSH using key pairs.
 
 ## SCRIPT SETTINGS - MUST BE MODIFIED BEFORE FIRST RUN
