@@ -2,7 +2,7 @@
 set -e
 
 #Script version
-VERSION="1.3.0"
+VERSION="1.3.1"
 
 #Color to the people
 RED='\x1B[0;31m'
@@ -365,10 +365,10 @@ if [ "$DBQUERY" -eq "1" ]; then
   
   #First let's check if the repo is accesible
   REPO_STATUS=$(curl -I "https://github.com/ElrondNetwork/elrond-go-scripts-v2" 2>&1 | awk '/HTTP\// {print $2}')
+  cd $SCRIPTPATH
   if [ "$REPO_STATUS" -eq "200" ]; then
                                 #Now let's fetch the latest version of the scripts
                                 echo -e "${GREEN}---> elrond-go-scripts-v2 is reachable ! Pulling latest version...${NC}"
-                                cd $SCRIPTPATH
                                 git reset --hard HEAD
                                 git pull
                       else echo -e "${RED}---> elrond-go-scripts-v2 on Github not reachable !${NC}"
