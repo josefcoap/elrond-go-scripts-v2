@@ -86,8 +86,11 @@ Example of adding your validator keys to a zip file (node-0.zip):
     
 	[SCRIPTS UPDATE]
 		#fetches the latest version of the scripts from github while backing up your configs
-		./script.sh github_pull   
-    
+		./script.sh github_pull
+		
+	[GET NODE LOGS]
+		#creates a tar.gz file containing the node logs
+		./script.sh get_logs 
 
 ## AUTO UPDATE
 
