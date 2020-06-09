@@ -166,6 +166,13 @@ The flag for storing into a file the received logger lines is  `-file`
           `./elrond-utils/logviewer -address localhost:8080 -level *:DEBUG,api:INFO -file` will start the binary that will try to connect to the locally-opened 8080 port, will set the log level
       to DEBUG for all packages except api package and will store all captured log lines in a file.
 
+## NODE LOGS INFO  
+
+As of version 1.3.4 of the scripts there is a new command for extracting and tarballing your node logs. The tar file will be stored in the $CUSTOM_HOME/elrond-logs folder and will contain a timestamp in their name.
+
+ Command Example: 
+      `./script.sh get_logs`
+
 ## FINAL THOUGHTS
 
 	KEEP CALM AND VALIDATE ON ELROND NETWORK!
