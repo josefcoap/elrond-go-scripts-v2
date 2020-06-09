@@ -2,7 +2,7 @@
 set -e
 
 #Script version
-VERSION="1.3.3"
+VERSION="1.3.4"
 
 #Color to the people
 RED='\x1B[0;31m'
@@ -381,6 +381,30 @@ if [ "$DBQUERY" -eq "1" ]; then
   echo -e "${GREEN}---> Finished fetching scripts. You are on version: ${CYAN}$VERSION${GREEN}...${NC}"
   echo -e
   
+  ;;
+
+'get_logs')
+  #Get journalctl logs from all the nodes
+  NODELOGS=$(cat $CUSTOM_HOME/.numberofnodes)
+  LOGSTIME=$(date "+%Y%m%d-%H%M")
+  LOGSOFFSET=8080
+  
+  #Make sure the log path exists
+  mkdir -p $CUSTOM_HOME/elrond-logs
+  
+  for i in $(seq 1 $NODELOGS);
+      do
+        LOGSINDEX=$(( $i - 1 ))
+        LOGSAPIPORT=$(( $LOGSOFFSET + $LOGSINDEX ))
+        echo -e
+        echo -e "${GREEN}Getting logs for Elrond Node-$LOGSINDEX binary...${NC}"
+        echo -e
+        LOGSPUBLIC=$(curl -s http://127.0.0.1:$LOGSAPIPORT/node/status | jq -r .details.erd_public_key_block_sign | head -c 12)
+        sudo journalctl --unit elrond-node-$LOGSINDEX >> $CUSTOM_HOME/elrond-logs/elrond-node-$LOGSINDEX-$LOGSPUBLIC.log
+      done
+
+  #Compress the logs and erase files
+  cd $CUSTOM_HOME/elrond-logs/ && tar -zcvf elrond-node-logs-$LOGSTIME.tar.gz *.log && rm *.log  
   ;;
 
 'version')
