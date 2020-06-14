@@ -173,6 +173,9 @@ The flag for storing into a file the received logger lines is  `-file`
 
 If there's ever a need to start a separate seed/boot node - there's a seednode binary available in the $CUSTOM_HOME/elrond-utils folder.
 This binary will start a new seed node that can be used as a fallback if the primary seed nodes are experiencing issues.
+The seednode requires a p2p.toml file to use for its settings, so you would also have to download that configuration file:
+
+  	  `mkdir -p config && curl -o config/p2p.toml https://raw.githubusercontent.com/ElrondNetwork/elrond-config/master/p2p.toml`
 
   Example:
   	  `./seeednode --help` will display all available arguments/options
