@@ -154,11 +154,13 @@ if [ "$DBQUERY" -eq "1" ]; then
                         UPDATEINDEX=$(( $i - 1 ))
                         UPDATEWORKDIR="$CUSTOM_HOME/elrond-nodes/node-$UPDATEINDEX"
                         cp -f $UPDATEWORKDIR/config/prefs.toml $UPDATEWORKDIR/config/prefs.toml.save
+                        cp -f $UPDATEWORKDIR/config/p2p.toml $UPDATEWORKDIR/config/p2p.toml.save
                         sudo systemctl stop elrond-node-$UPDATEINDEX
                         echo "Database Cleanup Called ! Erasing DB for elrond-node-$UPDATEINDEX..." >> $HOME/autoupdate.status
                         cleanup
                         update
                         mv $UPDATEWORKDIR/config/prefs.toml.save $UPDATEWORKDIR/config/prefs.toml
+                        mv $UPDATEWORKDIR/config/p2p.toml.save $UPDATEWORKDIR/config/p2p.toml
                         sudo systemctl start elrond-node-$UPDATEINDEX
                       done
       
