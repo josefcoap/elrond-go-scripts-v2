@@ -169,6 +169,19 @@ The flag for storing into a file the received logger lines is  `-file`
           `./elrond-utils/logviewer -address localhost:8080 -level *:DEBUG,api:INFO -file` will start the binary that will try to connect to the locally-opened 8080 port, will set the log level
       to DEBUG for all packages except api package and will store all captured log lines in a file.
 
+## SEEDNODE INFO
+
+If there's ever a need to start a separate seed/boot node - there's a seednode binary available in the $CUSTOM_HOME/elrond-utils folder.
+This binary will start a new seed node that can be used as a fallback if the primary seed nodes are experiencing issues.
+The seednode requires a p2p.toml file to use for its settings, so you would also have to download that configuration file:
+
+  	  `mkdir -p config && curl -o config/p2p.toml https://raw.githubusercontent.com/ElrondNetwork/elrond-config/master/p2p.toml`
+
+  Example:
+  	  `./seeednode --help` will display all available arguments/options
+      `./seeednode` will start the seed node using the default settings: `--port 10000, --p2p-seed "seed", --log-level "*:INFO "`
+	  `./seeednode --port 12000` will start the seed node using the settings: `--port 12000, --p2p-seed "seed", --log-level "*:INFO "`
+
 ## NODE LOGS INFO  
 
 As of version 1.3.4 of the scripts there is a new command for extracting and tarballing your node logs. The tar file will be stored in the $CUSTOM_HOME/elrond-logs folder and will contain a timestamp in their name.

@@ -275,6 +275,9 @@ if [ "$DBQUERY" -eq "1" ]; then
               
             if ps -all | grep -q logviewer; then killall logviewer; sleep 2; fi
             if [[ -e $CUSTOM_HOME/elrond-utils/logviewer ]]; then rm $CUSTOM_HOME/elrond-utils/logviewer; fi
+
+            if ps -all | grep -q seednode; then killall seednode; sleep 2; fi
+            if [[ -e $CUSTOM_HOME/elrond-utils/seednode ]]; then rm $CUSTOM_HOME/elrond-utils/seednode; fi
             
             rm -rf $CUSTOM_HOME/elrond-utils && rm -rf $CUSTOM_HOME/elrond-nodes
             if [[ -e $CUSTOM_HOME/autoupdate.status ]]; then rm $CUSTOM_HOME/autoupdate.status; fi 
