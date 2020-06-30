@@ -12,7 +12,7 @@ export PATH=$GOPATH/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 #See current running version
-CURRENT=$(curl -s http://localhost:8080/node/status | jq -r .details.erd_app_version)
+CURRENT=$($CUSTOM_HOME/elrond-nodes/node-0/node --version | awk -F '[ /-]' '{print $6}')
 
 #See current available version
 LATEST=$(curl --silent "https://api.github.com/repos/ElrondNetwork/elrond-go/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
